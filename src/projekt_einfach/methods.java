@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class methods implements buttons{
+    JFrame frame;
 
 
     @Override
@@ -126,5 +127,50 @@ public class methods implements buttons{
             }
         }// end tabelleUbersicht
 
+    public void erstellen(int abteilungnr) {
+       /* if (abteilung.equals("Rechnungen")) {
 
+        }//end if Rechnungen
+        else if (abteilung.equals("Kundendaten")) {
+
+        }//end if Kundendaten
+        else if (abteilung.equals("Aufträge")) {
+
+        }//end if Aufträge
+        else if (abteilung.equals("Rechnungsgegenstand")) {
+        }//end if Rechnungsgegenstand
+*/
+        int fall = abteilungnr;
+        switch (fall){
+            case 1:
+                frame = new JFrame("GuiAuftragErstellen");
+                frame.setContentPane(new GuiAuftragErstellen().getPanel());
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.pack();
+                frame.setVisible(true);
+                break;
+            case 2:
+                frame = new JFrame("GuiKundenErfassen");
+                frame.setContentPane(new GuiKundenErfassen().getPanel());
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.pack();
+                frame.setVisible(true);
+                break;
+            case 3:
+                frame = new JFrame("GuiRechnungsgegErstellen");
+                frame.setContentPane(new GuiRechnungsgegErstellen().getPanel());
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.pack();
+                frame.setVisible(true);
+                break;
+            case 4:
+                frame = new JFrame("GuiNeueRechnung");
+                frame.setContentPane(new GuiNeueRechnung().getPanel());
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.pack();
+                frame.setVisible(true);
+                break;
+        }
+
+    }// end erstellen
 }//end Class

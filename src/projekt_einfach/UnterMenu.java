@@ -19,16 +19,18 @@ public class UnterMenu extends methods{
     private JPanel buttonsPanel;
     private JDialog frame;
 
+
     public JPanel getUnterMenu() {
         return main;
     }
 
-    public UnterMenu(String anzeigen, String loeschen, String aendern, String abteilung ) {
+    public UnterMenu(String anzeigen, String loeschen, String aendern, String abteilung, int abteilungsnr) {
         tabelleAnzeigen(anzeigen,table);
         title.setText(abteilung);
         erfassenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                erstellen(abteilungsnr);
 
             }
         });
@@ -41,15 +43,15 @@ public class UnterMenu extends methods{
         loeschenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            loeschen(loeschen, table,frame);
+                loeschen(loeschen, table,frame);
             }
         });
         refreshButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              tabelleAnzeigen(anzeigen, table);
+                tabelleAnzeigen(anzeigen, table);
             }
         });
-    }// end construtöööör
+    }// end constructor
 }//end class
 

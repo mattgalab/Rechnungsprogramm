@@ -16,6 +16,7 @@ public class GuiUbersicht extends methods {
     private JLabel titel;
     private JLabel logo;
     private JScrollPane tableScroll;
+    private JButton refreshButton;
     String loeschen;
     String aendern;
     String anzeigen;
@@ -26,46 +27,43 @@ public class GuiUbersicht extends methods {
             @Override
             public void actionPerformed(ActionEvent e) {
                 loeschen="DELETE FROM `auftrag` WHERE `Auftragsnr`=?";
-                aendern= "UPDATE `rechnung` SET `Re-Nr`=?,`KID`=?,`GegID`=?,`Auftragsnr`=?,`SID`=? WHERE 1;";
                 anzeigen= "SELECT * FROM `rechnung` WHERE 1;";
                 JFrame frame = new JFrame("Rechnungen");
-                frame.setContentPane(new UnterMenu(anzeigen,loeschen,aendern,frame.getTitle()).getUnterMenu());
+                abteilung=frame.getTitle();
+                int abteilungsnr=4;
+                frame.setContentPane(new UnterMenu(anzeigen,loeschen,aendern,abteilung,abteilungsnr).getUnterMenu());
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.pack();
                 frame.setVisible(true);
-
-
-
             }
         });
         kundendatenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 loeschen="DELETE FROM `kundendaten` WHERE `KID`=?;";
-                 anzeigen= "SELECT * FROM `kundendaten`;";
+                loeschen="DELETE FROM `kundendaten` WHERE `KID`=?;";
+                anzeigen= "SELECT * FROM `kundendaten`;";
                 JFrame frame = new JFrame("Kundendaten");
                 abteilung=frame.getTitle();
-                frame.setContentPane(new UnterMenu(anzeigen,loeschen,aendern,frame.getTitle()).getUnterMenu());
+                int abteilungsnr=2;
+                frame.setContentPane(new UnterMenu(anzeigen,loeschen,aendern,abteilung,abteilungsnr).getUnterMenu());
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.pack();
                 frame.setVisible(true);
-
             }
         });
         auftraegeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                  loeschen="DELETE FROM `auftrag` WHERE `Auftragsnr`=?;";
-                 anzeigen= "SELECT auftrag.Auftragsnr, auftrag.KID, kundendaten.Name, regeg.Gegenstand, " +
-                                    "auftrag.Stunden FROM kundendaten INNER JOIN auftrag ON kundendaten.KID = auftrag.KID " +
-                                    "INNER JOIN regeg ON auftrag.GegID= regeg.GegID;";
+                 anzeigen= "SELECT auftrag.`Auftragsnr`, auftrag.`KID`,kundendaten.Name, kundendaten.Ansprechpartner, auftrag.`Stunden`, auftrag.`Datum`FROM `auftrag` INNER JOIN kundendaten ON kundendaten.KID = auftrag.KID;" ;
+
                 JFrame frame = new JFrame("Aufträge");
                 abteilung=frame.getTitle();
-                frame.setContentPane(new UnterMenu(anzeigen,loeschen,aendern,frame.getTitle()).getUnterMenu());
+                int abteilungsnr=1;
+                frame.setContentPane(new UnterMenu(anzeigen,loeschen,aendern,abteilung,abteilungsnr).getUnterMenu());
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.pack();
                 frame.setVisible(true);
-
             }
         });
         rechnungsgegenstandButton.addActionListener(new ActionListener() {
@@ -75,7 +73,8 @@ public class GuiUbersicht extends methods {
                  anzeigen= "SELECT * FROM `regeg` WHERE 1;";
                 JFrame frame = new JFrame("Rechnungsgegenstand");
                 abteilung=frame.getTitle();
-                frame.setContentPane(new UnterMenu(anzeigen,loeschen,aendern,frame.getTitle()).getUnterMenu());
+                int abteilungsnr=3;
+                frame.setContentPane(new UnterMenu(anzeigen,loeschen,aendern,abteilung,abteilungsnr).getUnterMenu());
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.pack();
                 frame.setVisible(true);
@@ -92,10 +91,15 @@ public class GuiUbersicht extends methods {
                 frame.setVisible(true);
             }
         });
-        String sql = "SELECT auftrag.Auftragsnr, auftrag.KID, kundendaten.Name, regeg.Gegenstand," +
-                "auftrag.Stunden FROM kundendaten INNER JOIN auftrag ON kundendaten.KID = auftrag.KID " +
-                "INNER JOIN regeg ON auftrag.GegID= regeg.GegID;";
+        String sql = "SELECT auftrag.`Auftragsnr`, auftrag.`KID`,kundendaten.Name, kundendaten.Ansprechpartner, " +
+                "auftrag.`Stunden`, auftrag.`Datum`FROM `auftrag` INNER JOIN kundendaten ON kundendaten.KID = auftrag.KID;";
         tabelleAnzeigen(sql,table);
+        refreshButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tabelleAnzeigen(sql,table);
+            }
+        });
     }
 
     public JPanel getMain() {
