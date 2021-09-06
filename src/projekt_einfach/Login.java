@@ -17,10 +17,15 @@ public class Login extends JFrame {
     private JLabel lblPassword;
     private JPanel login;
     private JButton buttonLogin;
-    private JDialog frame;
+    private JDialog frame1;
+    private static JFrame frame;
 
+    public JPanel getLogin() {
+        return login;
+    }
 
     public Login() {
+
         buttonLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -51,20 +56,21 @@ public class Login extends JFrame {
                 }
                 System.out.println("passwort: " + pass + "  //  name: " + name );
                 if (namedb.equals(name) && passdb.equals(pass)){
-                    JOptionPane.showMessageDialog(frame,"Success! You're in!");
-                    dispose();
+
+                    frame.dispose();
+                    JOptionPane.showMessageDialog(frame1,"Success! You're in!");
                     GuiUbersicht.hauptfenster();
                 }
                 else{
-                    JOptionPane.showMessageDialog(frame,"Invalid password. Try again.","Error Message",
+                    JOptionPane.showMessageDialog(frame1,"Invalid password. Try again.","Error Message",
                             JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
     }
     public static void login() {
-        JFrame frame = new JFrame("Login");
-        frame.setContentPane(new Login().login);
+        frame = new JFrame("Login");
+        frame.setContentPane(new Login().getLogin());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

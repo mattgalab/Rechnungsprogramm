@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class PwTest {
+public class PwTest extends DbZugriff {
 
 	static Connection connect = null;                                                                                   // Klasse connection liefert uns die Basis fÃ¼r alle Datenbankverbindungen
 	static String ben ;
@@ -16,7 +16,7 @@ public class PwTest {
 
 	public static void pwtest()
 	{
-		connect=DbZugriff.connect();
+		connect=connect();
 		try
 		{
 			//ben =Login.getTextFieldName();

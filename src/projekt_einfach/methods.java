@@ -19,13 +19,13 @@ public class methods implements buttons{
         }//end if Rechnungen
         else if (abteilung.equals("Kundendaten")){
             String Name = table.getModel().getValueAt(table.getSelectedRow(),1).toString();
-            String plz = table.getModel().getValueAt(table.getSelectedRow(),4).toString();
-            String ort = table.getModel().getValueAt(table.getSelectedRow(),3).toString();
+            String plz = table.getModel().getValueAt(table.getSelectedRow(),3).toString();
+            String ort = table.getModel().getValueAt(table.getSelectedRow(),4).toString();
             String land = table.getModel().getValueAt(table.getSelectedRow(),5).toString();
             String ansprech = table.getModel().getValueAt(table.getSelectedRow(),6).toString();
             String strasse =  table.getModel().getValueAt(table.getSelectedRow(), 2).toString();
             String kid =  table.getModel().getValueAt(table.getSelectedRow(), 0).toString();
-
+            System.out.println(Name+" PLZ "+plz+ " ORT "+ ort+ " LAND "+ land+ " ANSPRECH "+ ansprech + " STrasse "+ strasse + " KID " + kid);
             Connection connect = DbZugriff.connect();
             try {
                 String sql = "UPDATE `kundendaten` SET `Name`=?,`PLZ`=?,`Ort`=?,`Land`=?,`Ansprechpartner`=?,`Strasse`=? WHERE `KID`=?;";
@@ -117,7 +117,7 @@ public class methods implements buttons{
     //funktioniert soweit
     @Override
     public void tabelleAnzeigen(String sql, JTable table) {                                                             // tabelle abfragen über erhaltene daten und in gui anzeigen
-            Connection connect = DbZugriff.connect();																		// Datenbankverbindung
+            Connection connect = DbZugriff.connect();																	// Datenbankverbindung
             try {
                 PreparedStatement pst = connect.prepareStatement(sql);
                 ResultSet rs = pst.executeQuery();

@@ -41,7 +41,7 @@ public class GuiUbersicht extends methods {
             @Override
             public void actionPerformed(ActionEvent e) {
                 loeschen="DELETE FROM `kundendaten` WHERE `KID`=?;";
-                anzeigen= "SELECT * FROM `kundendaten`;";
+                anzeigen= "SELECT `KID`, `Name`, `Strasse`, `PLZ`, `Ort`, `Land`, `Ansprechpartner` FROM `kundendaten` WHERE 1;";
                 JFrame frame = new JFrame("Kundendaten");
                 abteilung=frame.getTitle();
                 int abteilungsnr=2;
